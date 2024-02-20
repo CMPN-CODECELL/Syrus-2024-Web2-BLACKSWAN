@@ -27,7 +27,7 @@ const UserSchema=new mongoose.Schema({
         minLength: 6
     },
     bookmarks:[{
-        type:[mongoose.Schema.Types.ObjectId],
+        type:mongoose.Schema.Types.ObjectId,
         ref:"Post"
     }],
     points:{
@@ -40,11 +40,11 @@ const UserSchema=new mongoose.Schema({
         type:String,
     },
     events:[{
-        type:[mongoose.Schema.Types.ObjectId],
+        type:mongoose.Schema.Types.ObjectId,
         ref:"Event"
     }],
     posts:[{
-        type:[mongoose.Schema.Types.ObjectId],
+        type:mongoose.Schema.Types.ObjectId,
         ref:"Post"
     }],
 

@@ -1,4 +1,4 @@
-const Conversation = require("../models/Conversation.model.js");
+const Conversation = require("../models/Caffeine.model.js");
 const Message = require("../models/Message.model.js");
 
 const sendMessage = async (req, res) => {
