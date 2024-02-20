@@ -1,6 +1,8 @@
 // post.controller.js
 const Post=require("../models/Post.model");
 
+const User=require("../models/User.Model");
+
 const createPost = async (req, res) => {
     try {
         const { content } = req.body;
@@ -11,13 +13,20 @@ const createPost = async (req, res) => {
             content,
         });
 
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        user.posts.push(newPost._id);
+        await user.save(); // Save the updated user document
+
         res.status(201).json(newPost);
     } catch (error) {
         console.error("Error creating post:", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
 };
-
 const getPosts = async (req, res) => {
 
     try {

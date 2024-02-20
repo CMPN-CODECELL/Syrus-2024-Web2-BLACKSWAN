@@ -225,6 +225,26 @@ const getUserData = async (req, res) => {
         console.log("error in get user data", error);
         res.status(500).json({ error: "internal server error" });
     }
-}
+};
 
-module.exports={signup,signin, userStatus,updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost, getUserData}
+const getUserPosts = async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const user = await User.findById(userId).populate('posts');
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const posts = user.posts;
+
+        res.status(200).json({ message: "User posts found", posts });
+    }
+    catch (error) {
+        console.log("error in get user posts", error);
+        res.status(500).json({ error: "internal server error" });
+    }
+};
+
+module.exports={signup,signin, userStatus,updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost, getUserData,getUserPosts}
