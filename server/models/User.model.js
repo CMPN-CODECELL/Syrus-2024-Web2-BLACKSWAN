@@ -36,6 +36,17 @@ const UserSchema=new mongoose.Schema({
     ranking:{
         type:Number,
     },
+    phone:{
+        type:String,
+    },
+    events:[{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:"Event"
+    }],
+    posts:[{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:"Post"
+    }],
 
 });
 
