@@ -5,6 +5,9 @@ import useImageHook from '@/app/imagehook';
 import { changeProfilePic, getUserData } from '@/actions';
 import { useRouter } from 'next/navigation';
 import EditorCard from '@/app/ui/editorCard';
+import Posts from '@/app/ui/posts/posts';
+import Activity from '@/app/ui/activity/activity';
+import Metric from '@/app/ui/metrics/metrics';
 
 export default function ProfilePage() {
 
@@ -15,6 +18,8 @@ export default function ProfilePage() {
   const [editorOpen, setEditorOpen] = useState(false)
 
   const [profilePicKey, setProfilePicKey] = useState(0);
+
+  const [selectedTag, setSelectedTag] = useState(1)
 
   const [user, setUser] = React.useState({
     id: "",
@@ -105,16 +110,30 @@ export default function ProfilePage() {
         </section>
             
         <section className='flex justify-between'>
-          <div className={`w-full text-center bg-slate-200 text-black hover:bg-zinc-900 cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className}`}>
+          <div 
+            className={`w-full text-center hover:bg-zinc-900 cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className} ${selectedTag === 1 ? 'bg-slate-200 text-black' : 'bg-zinc-950 text-white'}`}
+            onClick={()=>{setSelectedTag(1)}}
+          >
             Metrics
           </div>
-          <div className={`w-full text-center bg-zinc-950 hover:bg-zinc-900 cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className}`}>
+          <div 
+            className={`w-full text-center cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className} ${selectedTag === 2 ? 'bg-slate-200 text-black' : 'bg-zinc-950 text-white'}`}
+            onClick={()=>{setSelectedTag(2)}}  
+          >
             Posts
           </div>
-          <div className={`w-full text-center bg-zinc-950 hover:bg-zinc-900 cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className}`}>
+          <div 
+            className={`w-full text-center cursor-pointer border-l border-r py-2 border-b text-[18px] ${karla.className} ${selectedTag === 3 ? 'bg-slate-200 text-black' : 'bg-zinc-950 text-white'}`}
+            onClick={()=>{setSelectedTag(3)}}
+          >
             Activity
           </div>
         </section>
+        <div>
+          {selectedTag === 1 && <Metric/>}
+          {selectedTag === 2 && <Posts/>}
+          {selectedTag === 3 && <Activity/>}         
+        </div>
             
         { editorOpen && <div>
             <EditorCard 
