@@ -8,14 +8,14 @@ const therapistRoutes=require("./therapist.routes");
 const calorieRoutes=require("./calorie.routes");
 const eventRoutes=require("./event.routes");
 const backendroutes=Router();
-backendroutes.use('/event',eventRoutes);
 backendroutes.use('/therapist',therapistRoutes);
 backendroutes.use('/user',userRoutes);
 backendroutes.use('/event',eventRoutes);
-backendroutes.use('/therapist',therapistRoutes);
 backendroutes.use('/message',messageRoutes);
 backendroutes.use('/post',postRoutes);
 backendroutes.use('/reply',replyRoutes);
 backendroutes.use('/caffeine',caffineRoutes);
 backendroutes.use('/calorie',calorieRoutes);
+backendroutes.use('/challenges',challengeRoutes);
+
 module.exports=backendroutes;
