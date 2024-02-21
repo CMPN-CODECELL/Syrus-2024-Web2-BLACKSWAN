@@ -247,4 +247,20 @@ const getUserPosts = async (req, res) => {
     }
 };
 
-module.exports={signup,signin, userStatus,updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost, getUserData,getUserPosts}
+const getUsersForLeaderBoard = async (req, res) => {
+    try {
+        // Fetch users sorted by points in descending order
+        const users = await User.find().sort({ points: -1 });
+
+        // You may want to limit the number of users returned, for example, the top 10
+        // const users = await User.find().sort({ points: -1 }).limit(10);
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error('Error fetching users for leaderboard:', error.message);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+module.exports={signup,signin, userStatus,updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost, getUserData,getUserPosts,getUsersForLeaderBoard}

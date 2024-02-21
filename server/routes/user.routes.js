@@ -1,5 +1,5 @@
 const  {Router}=require("express");
-const {signup,signin, userStatus, getUserData, updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost,getUserPosts}=require("../controller/userController");
+const {signup,signin, userStatus, getUserData, updateName,updateBio,updateProfilePic,bookmarkPost,unbookmarkPost,getUserPosts,getUsersForLeaderBoard}=require("../controller/userController");
 const {authMiddleware}=require("../middleware/userMiddleware");
 const { getUsersForSidebar } = require("../controller/sidebarController");
 const userRoutes=Router();
@@ -15,4 +15,6 @@ userRoutes.route('/update-name').post(authMiddleware,updateName);
 userRoutes.route('/update-bio').post(authMiddleware,updateBio);
 userRoutes.route('/update-profile-pic').post(authMiddleware,updateProfilePic);
 userRoutes.route('/get-user-posts').get(authMiddleware,getUserPosts);
+userRoutes.route('/leaderboard').get(getUsersForLeaderBoard);
+
 module.exports=userRoutes; 

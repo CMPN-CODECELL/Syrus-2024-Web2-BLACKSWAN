@@ -61,6 +61,29 @@ UserSchema.pre("save", async function(next) {
     }
 });
 
+UserSchema.methods.calculatePoints = function () {
+    let pointsFromPosts = 0;
+    let pointsFromLikes = 0;
+    let pointsFromEvents = 0;
+    let pointsFromChallenges = 0;
+
+    if (this.posts) {
+        pointsFromPosts = this.posts.length * 10;
+        pointsFromLikes = this.posts.reduce((totalLikes, post) => totalLikes + (post.likes ? post.likes.length : 0), 0);
+    }
+
+    if (this.events) {
+        pointsFromEvents = this.events.length * 20;
+    }
+
+    if (this.challenges) {
+        pointsFromChallenges = this.challenges.length * 50;
+    }
+
+    return pointsFromPosts + pointsFromLikes + pointsFromEvents + pointsFromChallenges;
+};
+
+
 const User=new mongoose.model("User",UserSchema);
 
 module.exports=User;

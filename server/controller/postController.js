@@ -1,6 +1,5 @@
 // post.controller.js
 const Post=require("../models/Post.model");
-
 const User=require("../models/User.Model");
 
 const createPost = async (req, res) => {
@@ -19,14 +18,15 @@ const createPost = async (req, res) => {
         }
 
         user.posts.push(newPost._id);
+        user.points = user.calculatePoints();
         await user.save(); // Save the updated user document
-
         res.status(201).json(newPost);
     } catch (error) {
         console.error("Error creating post:", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
 };
+
 const getPosts = async (req, res) => {
 
     try {

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const eventSchema = new mongoose.Schema({
+const ChallengeSchema = new mongoose.Schema({
+
 
     name:{
         type:String,
@@ -9,28 +10,21 @@ const eventSchema = new mongoose.Schema({
     description:{
 
         type:String,
-        maxLength: 1000 
-    },
-    owner:{
-        type:String,
-        required:true,
-
+        maxLength: 200 
     },
     participants:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
-
-    }],
+}],
       
     date:{
        type:String,
        required:true 
     },
-    location_src:{
-        type:String
- }
-    
+    duration:{
+        type:String,
+    }
 })
-const event =new mongoose.model("event",eventSchema);
+const Challenge =new mongoose.model("challenge",ChallengeSchemahallengeSchema);
 
-module.exports=event;
+module.exports=Challenge;

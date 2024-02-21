@@ -6,5 +6,6 @@ const router = express.Router();
 router.get("/getposts", authMiddleware, getPosts);
 router.post("/create", authMiddleware, createPost);
 router.post("/like/:postId", authMiddleware, likePost);
+router.post("/unlike/:postId", authMiddleware, unlikePost);
 
 module.exports = router;
