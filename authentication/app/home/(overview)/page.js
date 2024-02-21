@@ -31,14 +31,11 @@ export default function Home(){
 
     console.log(posts)
 
-
-    const content = "somfdfj asdjfj kdsfk dsfj sklfj kjdfjf sjfdsaf fnknf ififu mf wefh fiuyfdjf fnd fhisafj fnsdfsjadfi nsdnfn idfiuiuu nfhfhj   fdui klfjudhfkpk  if shfyg  fdji ugf7d fdjfih"
-    const content1 = "somfdfj asdjfj "
     return (
-        <div className="text-white max-h-screen overflow-auto">
-            <div className="h-full overflow-auto">
+        <div className="text-white max-h-screen overflow-auto pr-10 w-full flex justify-center ">
+            <div className="h-full overflow-auto pr-32">
                 { posts &&
-                    posts.map((post)=>{
+                    posts.reverse().map((post)=>{
                         return <PostCard 
                                 content={post.content} 
                                 likes={post.likesCount} 
@@ -46,29 +43,12 @@ export default function Home(){
                                 username={post.user.username}
                                 isLiked={post.isLiked}
                                 id={post._id}
+                                profile={post.user.profilePic}
                                 key={post._id}
                             />
                         }
                     )
                 }
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content}/>
-                <PostCard content={content1}/>
-                <PostCard content={content1}/>
-                <PostCard content={content1}/>
-                <PostCard content={content1}/>
             </div>
         </div>
     )

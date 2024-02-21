@@ -143,3 +143,250 @@ export const getUserData = async () => {
         return ;
     }
 }
+
+export const getChatSidebar = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/api/v1/user/sidebar", {
+            withCredentials: true,
+        })
+
+        console.log(response);
+
+        return response.data;
+    } catch (error) {
+        console.log("error in getting chat sidebar", error)
+    }
+}
+
+export const getCompleteChat = async (receiverId) => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/v1/message/${receiverId}`, {
+            withCredentials: true,
+        })
+        
+        console.log(response.data)
+        return response.data
+    } catch (error) {
+        console.log("error in getting chat sidebar", error)
+        return
+    }
+}
+
+export const sendMessage = async (content, receiverId) => {
+    try {
+        const response = await axios.post(`http://localhost:8000/api/v1/message/send/${receiverId}`,{
+            message: content
+        },
+         {
+            withCredentials: true,
+        })
+
+        console.log(response.data)
+
+        return response.data;
+    } catch (error) {
+        console.log("error in sending chat", error)
+        return;
+    }
+}
+
+export const getCaffieneConsumption = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/api/v1/caffeine/total", {
+            withCredentials: true,
+        })
+
+        return response.data.totalCaffeineAmount
+    } catch (error) {
+        console.log("error in coffee", error)
+        return;
+    }
+}
+
+export const addCaffiene = async (type, quantity) => {
+    try {
+        console.log(type)
+        const response = await axios.post("http://localhost:8000/api/v1/caffeine/add", {
+            productType: type,
+            quantity: quantity
+        }, {
+            withCredentials: true
+        })
+
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.log("error in coffee", error)
+        return;
+    }
+}
+
+export const getCalorie = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/api/v1/calorie/total", {
+            withCredentials: true,
+        })
+
+        console.log(response);
+        return response.data.totalCalorieAmount ;
+    } catch (error) {
+        console.log("error in calorie");
+        return;
+    }
+}
+
+export const addCalorie = async (type, quantity) => {
+    try {
+        const response = await axios.post("http://localhost:8000/api/v1/calorie/add", {
+            productType: type,
+            quantity: quantity
+        }, {
+            withCredentials: true
+        })
+
+        console.log(response.data)
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
+
+export const getEvents = async () =>  {
+    try {
+        const response = await axios.get("http://localhost:8000/api/v1/event/get", {
+            withCredentials: true,
+        })
+
+        console.log(response.data)
+        return response.data.events;
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
+
+
+export const apply = async (id) => {
+    try {
+        console.log(id)
+        const response = await axios.get(`http://localhost:8000/api/v1/event/apply/${id}`, {
+            withCredentials: true,
+        })
+
+        console.log(response)
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+export const sendPost = async (content) => {
+    try {
+        const response = await axios.post(`http://localhost:8000/api/v1/post/create`, {
+            content: content
+        }, {
+            withCredentials: true
+        })
+
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+export const getLeaderList = async () => {
+    try {
+        const response = await axios.get('http://localhost:8000/api/v1/user/leaderboard');
+
+        return response.data
+    } catch (error) {   
+        console.log(error);
+        return;
+    }
+}
+
+export const getPostByid = async (id) => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/v1/post/getPostById/${id}`, {
+            withCredentials: true,
+        })
+        console.log(response.data.post)
+        return response.data.post;
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+export const getAllRepliesForPost = async (id) => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/v1/reply/get/${id}`, {
+            withCredentials: true
+        });
+
+        return response.data;
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+export const reply = async  (id, content) => {
+    try {
+        const response= await axios.post(`http://localhost:8000/api/v1/reply/create`, {
+            postId: id,
+            content: content
+        }, {
+            withCredentials: true
+        })
+
+        return(response.data);
+    } catch (error) {
+        console.log(error);
+        return;
+    }
+}
+
+export const getEventsForUser = async () => {
+    try {
+        const response = await axios.get("http://localhost:8000/api/v1/event/appliedEvent", {
+            withCredentials: true
+        })
+
+        return response.data.events;
+    } catch (error) {
+        console.log(error)
+
+        return;
+    }
+}
+
+export const getUserPosts = async () => {
+    try {
+        const response = await axios.get('http://localhost:8000/api/v1/user/get-user-posts', {
+            withCredentials: true
+        })
+
+        return response.data.posts;
+        
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+export const getAllChallenges = async() => {
+    try {
+        const response = await axios.get('http://localhost:8000/api/v1/challenges/get', {
+            withCredentials: true,
+        })
+
+        return(response.data.challenges)
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
